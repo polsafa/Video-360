@@ -2,14 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum audioFX
+{
+    CLICK = 0,
+    START  = 1
+}
+
+public enum scenes
+{
+    MENU = 0,
+    VR = 1
+}
 
 //patron de programación singleton
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
     private AudioClip[] arrayFX;
-    private AudioSource audioSource;
-    private bool initialez = false;
+    private AudioSource audioSource = null;
+    
 
     public static GameManager instance
     {
@@ -20,21 +31,30 @@ public class GameManager : MonoBehaviour
                 GameObject newManager = new GameObject("Game Manager");
                 _instance = newManager.AddComponent<GameManager>();
                             newManager.AddComponent<AudioSource>();
-                DontDestroyOnLoad(_instance);
+                DontDestroyOnLoad(newManager);
             }
 
             return _instance;
         }
     }
 
-    public bool initialized  { get{ return initialez; }  }
-
     public void init()
     {
-        initialez = true;
         audioSource = GetComponent<AudioSource>();
         audioSource.loop = false;
         audioSource.playOnAwake = false;
         arrayFX = Resources.LoadAll<AudioClip>("Audios/FX");
+    }
+
+    public  void playFX(audioFX fx)
+    {
+        if (audioSource == null)
+            init();
+            
+        
+        if (audioSource.isPlaying)
+            audioSource.Stop();
+
+        audioSource.PlayOneShot(arrayFX[(int) fx]);
     }
 }

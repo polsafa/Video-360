@@ -1,16 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public audioFX buttonclick, buttonplay;
+
+    public void buttonFX(audioFX fx = audioFX.CLICK)
     {
-        if (!GameManager.instance.initialized)
-            GameManager.instance.init();
-        
+        GameManager.instance.playFX(fx);
     }
 
-    
+    public void buttonChangeScene()
+    {
+        buttonFX(buttonplay);
+        SceneManager.LoadScene((int)scenes.VR);
+    }
+
+    public void ButtonClick()
+    {
+        buttonFX(buttonclick);
+    }
+
+
 }
