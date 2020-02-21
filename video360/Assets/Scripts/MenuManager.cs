@@ -5,6 +5,11 @@ public class MenuManager : MonoBehaviour
 {
     public audioFX buttonclick, buttonplay;
 
+    private void Awake()
+    {
+        UnityEngine.XR.XRSettings.enabled = false;
+    }
+
     public void buttonFX(audioFX fx = audioFX.CLICK)
     {
         GameManager.instance.playFX(fx);

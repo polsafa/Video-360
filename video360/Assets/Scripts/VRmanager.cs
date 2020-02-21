@@ -16,12 +16,23 @@ public class VRmanager : MonoBehaviour
 {
     public List<TimeEvent> timeEvents = new List<TimeEvent>();
     public Slider slider;
+    public static VRmanager instance;
+    public GameObject change;
+    public GameObject play, pause;
+    public float timestoped;
+    public double totaltime, currenttime;
+    public VideoPlayer vrplayer;
+    public byte currentevent;
 
+    private void Awake()
+    {
 
-    private double totaltime, currenttime;
-    private VideoPlayer vrplayer;
-    private byte currentevent;
+        change = play;
+        UnityEngine.XR.XRSettings.enabled = true;
+        if (instance == null)
+            instance = this;
 
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -63,23 +74,61 @@ public class VRmanager : MonoBehaviour
     void Update()
     {
         if (vrplayer.isPlaying)
-        {
+        {   
             currenttime = vrplayer.time;
             getcurrenttime();
             slider.value = (float)(currenttime / totaltime);
         }
+
+    }
+    public void multiChoice()
+    {
+        
+        if (vrplayer.isPlaying)
+        {
+            play.SetActive(false);
+            change = pause;
+            activeRaoutine();
+            vrplayer.Stop();
+            timestoped = (float) currenttime;
+        }
+        else
+        {
+            pause.SetActive(false);
+            change = play;
+            activeRaoutine();
+            VRmanager.instance.playVideo(timestoped); 
+        }
+        
     }
 
+    public void havedelay()
+    {
+        change.SetActive(true);
+    }
+   
     private void getcurrenttime()
     {
         if(timeEvents.Count > 0 && timeEvents.Count > currentevent)
         {
-            if(timeEvents[currentevent].time <= currentevent)
+            if(timeEvents[currentevent].time <= currenttime)
             {
                 timeEvents[currentevent].obj.SetActive(true);
                 currentevent++;
                 vrplayer.Pause();
             }
         }
+    }
+
+    public void activeRaoutine()
+    {
+        StartCoroutine(ActiveButton());
+    }
+
+    public IEnumerator ActiveButton()
+    {
+       
+        yield return new WaitForSeconds(1);
+        havedelay();
     }
 }

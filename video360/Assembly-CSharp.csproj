@@ -62,14 +62,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\BotonPlay.cs" />
+    <Compile Include="Assets\Scripts\BotonReload.cs" />
+    <Compile Include="Assets\Scripts\ButtonGoMenu.cs" />
     <Compile Include="Assets\Scripts\ChangeScene.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\InfoDisapear.cs" />
     <Compile Include="Assets\Scripts\IObjectInteractable.cs" />
     <Compile Include="Assets\Scripts\MenuManager.cs" />
+    <Compile Include="Assets\Scripts\MultipleChoice.cs" />
     <Compile Include="Assets\Scripts\ObjectDisableOnClick.cs" />
     <Compile Include="Assets\Scripts\ObjectInteractable.cs" />
     <Compile Include="Assets\Scripts\ObjectWithCooldown.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\ReloadScene.cs" />
     <Compile Include="Assets\Scripts\VRmanager.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/nork_/OneDrive/Escritorio/repo/Video360/Video-360/video360/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

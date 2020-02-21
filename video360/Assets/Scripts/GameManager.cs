@@ -5,7 +5,8 @@ using UnityEngine;
 public enum audioFX
 {
     CLICK = 0,
-    START  = 1
+    START  = 1,
+    ERROR = 2
 }
 
 public enum scenes
